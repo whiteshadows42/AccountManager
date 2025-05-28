@@ -113,10 +113,10 @@ public class AccountControllerIntegrationTest {
     public void givenClientFormattedCpfRequest_whenAddingAccount_thenOK() throws Exception {
         AccountRequest account = new AccountRequest();
         account.setAccountType(TypeEnum.CORRENTE.getType());
-        account.setClientCpf("817.672.190-59");
+        account.setClientCpf("619.874.460-46");
         var client = Client.builder()
                 .name("test")
-                .cpf("817.672.190-59")
+                .cpf(("619.874.460-46").replaceAll("[^0-9]", ""))
                 .birthday(LocalDate.of(1990, 1, 1))
                 .build();
         clientRepository.save(client);
