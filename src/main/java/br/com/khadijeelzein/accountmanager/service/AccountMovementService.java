@@ -33,8 +33,8 @@ public class AccountMovementService implements AccountMovementServiceInterface {
     public void accountTransfer(AccountMovementRequest accountMovementRequest) {
         var isValid = checkAccountRequest(accountMovementRequest);
         if(isValid) {
-            var balanceOrigin = getBalanceFromAccount(accountMovementRequest);
-            var balanceDestination = getBalanceFromAccount(accountMovementRequest);
+            var balanceOrigin = getBalanceFromAccount(accountMovementRequest.getAccountNbrOrigin());
+            var balanceDestination = getBalanceFromAccount(accountMovementRequest.getAccountNbrDestination());
             var newBalanceOrigin = balanceOrigin - accountMovementRequest.getAmount();
             var newBalanceDestination = balanceDestination + accountMovementRequest.getAmount();
             updateAccountBalances(accountMovementRequest, newBalanceOrigin, newBalanceDestination);
@@ -55,8 +55,8 @@ public class AccountMovementService implements AccountMovementServiceInterface {
        accountService.updateAllAccountBalance(accounts);
     }
 
-    private Double getBalanceFromAccount(AccountMovementRequest accountMovementRequest) {
-        AccountBalanceProjection balanceOriginProjection = accountService.getAccountBalance(accountMovementRequest.getAccountNbrOrigin());
+    private Double getBalanceFromAccount(Long accountNbr) {
+        AccountBalanceProjection balanceOriginProjection = accountService.getAccountBalance(accountNbr);
         return balanceOriginProjection.getCurrentBalance();
     }
 

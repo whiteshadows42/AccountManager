@@ -42,8 +42,6 @@ public class ClientService implements ClientServiceInterface {
 
     @Override
     public boolean existsClient(String cpf){
-        var exists = clientRepository.existsClientByCpf(cpf.replaceAll("[^0-9]", ""));
-        var i = 0;
-        return exists;
+        return clientRepository.existsClientByCpf(cpf.replaceAll("[^0-9]", ""));
     }
 }
